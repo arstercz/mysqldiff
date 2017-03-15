@@ -1,0 +1,18 @@
+[backend]
+dsn = user_mysqlmon:xxxxxxxx@tcp(10.0.21.17:3306)/mysqldiff?charset=utf8
+
+[test3301]
+host = 10.0.21.5
+port = 3301
+db   = test
+user = user_mysqldiff
+pass = xxxxxxxx
+tag  = host_location
+
+[test3306]
+host = 10.0.21.7
+port = 3306
+db   = percona
+user = user_mysqldiff
+pass = xxxxxxxx
+tag  = host_location
