@@ -28,6 +28,7 @@ grant select on *.* to user_mysqldiff@`10.0.21.%` with grant option;
 ```
 
 #### conf file
+sys-mysql-diff monitor all instance when db option is `information_schema`.
 ```
 [backend]
 dsn = user_mysqlmon:xxxxxxxx@tcp(10.0.21.17:3306)/mysqldiff?charset=utf8
