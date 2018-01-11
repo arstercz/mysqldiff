@@ -4,7 +4,7 @@ Wrap the sys-mysql-diff script to monitor MySQL changes with batch methods.
 
 ## Dependency
 
-[sys-mysql-diff](https://github.com/chenzhe07/sys-toolkit#sys-mysql-diff)
+[sys-mysql-diff](https://github.com/arstercz/sys-toolkit#sys-mysql-diff)
 
 ## How to build
 
