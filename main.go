@@ -17,7 +17,6 @@ import (
 	"strings"
 )
 
-
 var config struct {
 	Conf      string
 	Debug     bool
@@ -65,8 +64,8 @@ func main() {
 
 	sections := get_mysql_list(conf_fh)
 	for _, section := range sections {
-		if ! strings.EqualFold(section, "default") && 
-			! strings.EqualFold(section, "backend") {
+		if !strings.EqualFold(section, "default") &&
+			!strings.EqualFold(section, "backend") {
 			//check mysql list
 			mysqlval, err := get_mysql_instance(conf_fh, section)
 			if err != nil {
