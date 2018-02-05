@@ -22,15 +22,20 @@ func get_backend_dsn(c *goconfig.ConfigFile) (dsn string, err error) {
 }
 
 func get_mysql_instance(c *goconfig.ConfigFile, instance string) (t mysqlParams, err error) {
-	t.host, err = c.GetString(instance, "host")
-	t.port, err = c.GetInt64(instance, "port")
-	t.db,   err = c.GetString(instance, "db")
-	t.user, err = c.GetString(instance, "user")
-	t.pass, err = c.GetString(instance, "pass")
-	t.tag,  err = c.GetString(instance, "tag")
+	t.host, err    = c.GetString(instance, "host")
+	t.port, err    = c.GetInt64(instance, "port")
+	t.db,   err    = c.GetString(instance, "db")
+	t.user, err    = c.GetString(instance, "user")
+	t.pass, err    = c.GetString(instance, "pass")
+	t.tag,  err    = c.GetString(instance, "tag")
 
 	if err != nil {
 		return t, err
+	}
+	//optional option, default charset is utf8
+	t.charset, err = c.GetString(instance, "charset")
+	if err != nil {
+	  t.charset = "utf8"
 	}
 	return t, nil
 }

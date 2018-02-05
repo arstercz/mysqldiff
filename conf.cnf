@@ -7,6 +7,7 @@ port = 3301
 db   = test
 user = user_mysqldiff
 pass = xxxxxxxx
+charset = utf8
 tag  = host_location
 
 [test3306]
@@ -15,4 +16,5 @@ port = 3306
 db   = percona
 user = user_mysqldiff
 pass = xxxxxxxx
+charset = utf8mb4
 tag  = host_location

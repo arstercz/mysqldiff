@@ -35,7 +35,7 @@ func startDiff(p *mysqlParams) (string, error) {
 	//	return nil
 	//}
 	out, err := exec.Command(commandPath, "-h", p.host, "-P", strconv.FormatUint(uint64(p.port), 10),
-		"-d", p.db, "-u", p.user, "-p", p.pass, "-t", "-r").CombinedOutput()
+		"-d", p.db, "-c", p.charset, "-u", p.user, "-p", p.pass, "-t", "-r").CombinedOutput()
 	if err != nil {
 		fmt.Printf("execute command error: %s\n", string(out))
 		return "", err

@@ -6,6 +6,7 @@ type mysqlParams struct {
 	db	string
 	user	string
 	pass	string
+	charset	string
 	tag	string
 	changes	string
 }
