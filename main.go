@@ -11,10 +11,10 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 var config struct {
@@ -33,7 +33,7 @@ func main() {
 	config.Conf = *conf
 
 	if len(config.Conf) <= 0 {
-		fmt.Println("Error: You must secipfy the conf file")
+		log.Printf("Error: You must secipfy the conf file")
 		os.Exit(1)
 	}
 	if *logpath != "" {
@@ -51,14 +51,14 @@ func main() {
 
 	conf_fh, err := get_config(config.Conf)
 	if err != nil {
-		fmt.Println("Error: read config file error")
+		log.Printf("Error: read config file error")
 		os.Exit(1)
 	}
 
 	backend_dsn, err := get_backend_dsn(conf_fh)
 	backend_dbh, err := dbh(backend_dsn)
 	if err != nil {
-		fmt.Printf("get backend dbh error: %s", err)
+		log.Printf("get backend dbh error: %s", err)
 		os.Exit(1)
 	}
 
@@ -67,18 +67,20 @@ func main() {
 		if !strings.EqualFold(section, "default") &&
 			!strings.EqualFold(section, "backend") {
 			//check mysql list
+			startdiff := time.Now()
 			mysqlval, err := get_mysql_instance(conf_fh, section)
 			if err != nil {
-				fmt.Printf("Warn: get instance for section [%s] error: %v\n", section, err)
+				log.Printf("Warn: get instance for section [%s] error: %v\n", section, err)
 				continue
 			}
 			mysqlval.changes, err = startDiff(&mysqlval)
 			if err != nil {
-				fmt.Printf("Warn: get changes for section [%s] error: %v\n", section, err)
+				log.Printf("Warn: get changes for section [%s] error: %v\n", section, err)
 				continue
 			}
+			elapsed := time.Since(startdiff)
 			if *verbose {
-				fmt.Printf("changes from %s:%d \n%s", mysqlval.host, mysqlval.port, mysqlval.changes)
+				log.Printf("=> changes from %s:%d, elapsed %s\n%s", mysqlval.host, mysqlval.port, elapsed, mysqlval.changes)
 			}
 			if len(mysqlval.changes) == 0 {
 				continue
