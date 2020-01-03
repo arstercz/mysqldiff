@@ -47,8 +47,6 @@ func main() {
 		log.SetOutput(f)
 	}
 
-	log.Printf("---------------------------")
-
 	conf_fh, err := get_config(config.Conf)
 	if err != nil {
 		log.Printf("Error: read config file error")
@@ -61,6 +59,8 @@ func main() {
 		log.Printf("get backend dbh error: %s", err)
 		os.Exit(1)
 	}
+
+	log.Printf("begin ---------------------------")
 
 	sections := get_mysql_list(conf_fh)
 	for _, section := range sections {
@@ -90,5 +90,5 @@ func main() {
 			}
 		}
 	}
-	log.Printf("---------------------------")
+	log.Printf("end ---------------------------")
 }
